@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // function map
+
+        function map(array, callback) {
+            const result = [];
+
+            for (let i = 0; i < array.length; i++) {
+                const element = callback(array[i], i, array);
+
+                result.push(element);
+            }
+
+            return result;
+        }
+
+        const arr = [1, 2, 3]
+
+        const resMap = map(arr, function(x) {
+            return x ** 3;
+        });
+
+        console.log(resMap);
+
+        // function filter
+
+        function filter(array, callback) {
+            const result = [];
+
+            for (let i = 0; i < array.length; i++) {
+                const condition = callback(array[i], i, array);
+
+                if (condition) {
+                    result.push(array[i]);
+                }
+            }
+
+            return result;
+        }
+
+        const resFilter = filter(arr, function(x) {
+            return x % 2 === 0;
+        })
+
+        console.log(resFilter);
+
+        // function notifications
+
+        const notifications = [
+            {
+                date: '20/04/2022',
+                text: 'Some message text'
+            },
+            {
+                date: '20/04/2022',
+                text: 'Some message text'
+            },
+            {
+                date: '19/04/2022',
+                text: 'Some message text'
+            },
+            {
+                date: '18/04/2022',
+                text: 'Some message text'
+            }
+        ]
+
+        function groupBy(array, property) {
+            const result = {};
+
+            return array.reduce(function(acc, notification){
+                const propertyGroupBy = [notification[property]];
+
+                if(!acc[propertyGroupBy]) {
+                    acc[propertyGroupBy] = [];
+                }
+
+                acc[propertyGroupBy].push(notification);
+
+                return acc;
+
+            }, result);
+        }
+
+        console.log(groupBy(notifications, 'date'));
+    </script>
+</body>
+</html>
